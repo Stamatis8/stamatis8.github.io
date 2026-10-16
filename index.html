@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Portfolio</title>
+    <style>
+        /* MINIMALIST STYLING */
+        :root {
+            --bg-color: #fafafa;
+            --text-color: #111;
+            --accent-color: #555;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+
+        header {
+            min-height: 80vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 2rem;
+        }
+
+        header h1 {
+            font-size: 3rem;
+            margin: 0 0 0.5rem 0;
+            letter-spacing: -1px;
+        }
+
+        header p {
+            font-size: 1.2rem;
+            color: var(--accent-color);
+            max-width: 600px;
+        }
+
+        /* PROJECT CONTAINER */
+        .portfolio-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 2rem 5rem 2rem;
+        }
+
+        .project {
+            display: flex;
+            flex-direction: column;
+            margin-bottom: 8rem;
+            /* Animation starting state */
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+
+        /* Triggered by JavaScript when scrolling */
+        .project.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .project img {
+            width: 100%;
+            height: auto;
+            border-radius: 8px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+            margin-bottom: 2rem;
+            background-color: #eee; /* Placeholder background */
+        }
+
+        .project-info h2 {
+            font-size: 2rem;
+            margin: 0 0 1rem 0;
+        }
+
+        .project-info ul {
+            padding-left: 1.2rem;
+            margin-bottom: 1.5rem;
+            color: var(--accent-color);
+        }
+
+        .project-info li {
+            margin-bottom: 0.5rem;
+        }
+
+        .project-info a {
+            display: inline-block;
+            text-decoration: none;
+            color: var(--text-color);
+            font-weight: 600;
+            border-bottom: 2px solid var(--text-color);
+            padding-bottom: 2px;
+            transition: color 0.2s, border-color 0.2s;
+        }
+
+        .project-info a:hover {
+            color: #888;
+            border-bottom: 2px solid #888;
+        }
+
+        /* RESPONSIVE DESIGN */
+        @media (min-width: 768px) {
+            .project {
+                flex-direction: row;
+                align-items: center;
+                gap: 3rem;
+            }
+            /* Alternate layout: even projects have image on the right */
+            .project:nth-child(even) {
+                flex-direction: row-reverse;
+            }
+            .project img {
+                width: 50%;
+                margin-bottom: 0;
+            }
+            .project-info {
+                width: 50%;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Hi, I'm [Your Name]</h1>
+        <p>I build clean, functional, and beautiful digital experiences. Scroll down to see my work.</p>
+    </header>
+
+    <main class="portfolio-container">
+        
+        <!-- PROJECT 1 -->
+        <section class="project">
+            <!-- Put your image or GIF link in the src below -->
+            <img src="https://via.placeholder.com/600x400.png?text=Project+1+GIF" alt="Project 1 preview">
+            <div class="project-info">
+                <h2>Project Alpha</h2>
+                <ul>
+                    <li>Designed and developed a minimalist task tracker.</li>
+                    <li>Built using HTML, CSS, and vanilla JavaScript.</li>
+                    <li>Focuses on smooth interactions and fast load times.</li>
+                </ul>
+                <a href="https://example.com" target="_blank">See more work &rarr;</a>
+            </div>
+        </section>
+
+        <!-- PROJECT 2 -->
+        <section class="project">
+            <img src="https://via.placeholder.com/600x400.png?text=Project+2+Image" alt="Project 2 preview">
+            <div class="project-info">
+                <h2>Data Dashboard</h2>
+                <ul>
+                    <li>Created a dynamic data visualization dashboard.</li>
+                    <li>Integrated external APIs to fetch real-time analytics.</li>
+                    <li>Fully responsive design for mobile and desktop.</li>
+                </ul>
+                <a href="https://example.com" target="_blank">See more work &rarr;</a>
+            </div>
+        </section>
+
+        <!-- PROJECT 3 -->
+        <section class="project">
+            <img src="https://via.placeholder.com/600x400.png?text=Project+3+GIF" alt="Project 3 preview">
+            <div class="project-info">
+                <h2>E-commerce Concept</h2>
+                <ul>
+                    <li>UI/UX redesign for a boutique clothing store.</li>
+                    <li>Implemented custom CSS animations for product galleries.</li>
+                    <li>Increased user retention by 20% in A/B testing.</li>
+                </ul>
+                <a href="https://example.com" target="_blank">See more work &rarr;</a>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- JAVASCRIPT FOR SCROLL ANIMATION -->
+    <script>
+        // This script watches for elements to enter the screen and adds the 'visible' class
+        document.addEventListener("DOMContentLoaded", () => {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach((entry) => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, {
+                threshold: 0.15 // Triggers when 15% of the element is visible
+            });
+
+            const projects = document.querySelectorAll('.project');
+            projects.forEach((project) => {
+                observer.observe(project);
+            });
+        });
+    </script>
+</body>
+</html>
